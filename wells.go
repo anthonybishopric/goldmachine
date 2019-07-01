@@ -31,11 +31,41 @@ func ParseCheckingCSV(in string) ([]JournalEntry, error) {
 		moneyAmount := money.New(int64(amount*100), "USD")
 		memo := in[4]
 		if amount < 0 {
-			je.AddEntry(NewDebitEntry(moneyAmount.Absolute(), expenseAccountFromMemo(memo), memo))
+			je.AddEntry(NewDebitEntry(moneyAmount.Absolute(), accountFromPatterns(memo, checkingPatterns), memo))
 			je.AddEntry(NewCreditEntry(moneyAmount.Absolute(), CHECKING_ACCOUNT, memo))
 		} else {
-			je.AddEntry(NewCreditEntry(moneyAmount, revenueAccountFromMemo(memo), memo))
+			je.AddEntry(NewCreditEntry(moneyAmount, accountFromPatterns(memo, checkingPatterns), memo))
 			je.AddEntry(NewDebitEntry(moneyAmount, CHECKING_ACCOUNT, memo))
+		}
+		je.Identifier = memo
+		return *je
+	})
+}
+
+func ParseCreditCardCSV(in string) ([]JournalEntry, error) {
+	return convertToJournalEntries(in, func(in []string) JournalEntry {
+		// "01/09/2019","-28.13","*","","4505 BURGERS AND B SAN FRANCISCOCA"
+		// actually identical to checking accounts but we keep them split in case there's future diversions
+		je := &JournalEntry{
+			AccountEntries: []AccountEntry{},
+		}
+		effective, err := time.Parse("01/02/2006", in[0])
+		if err != nil {
+			panic(err)
+		}
+		je.EffectiveAt = effective
+		amount, err := strconv.ParseFloat(in[1], 64)
+		if err != nil {
+			panic(err)
+		}
+		moneyAmount := money.New(int64(amount*100), "USD")
+		memo := in[4]
+		if amount < 0 {
+			je.AddEntry(NewDebitEntry(moneyAmount.Absolute(), accountFromPatterns(memo, creditCardPatterns), memo))
+			je.AddEntry(NewCreditEntry(moneyAmount.Absolute(), CREDIT_CARD, memo))
+		} else {
+			je.AddEntry(NewCreditEntry(moneyAmount, accountFromPatterns(memo, creditCardPatterns), memo))
+			je.AddEntry(NewDebitEntry(moneyAmount, CREDIT_CARD, memo))
 		}
 		je.Identifier = memo
 		return *je

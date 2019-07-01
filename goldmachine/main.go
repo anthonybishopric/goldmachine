@@ -14,13 +14,22 @@ var (
 
 func main() {
 	kingpin.Parse()
+	jes := []goldmachine.JournalEntry{}
 	if *checkingIn != "" {
-		journalEntries, err := goldmachine.ParseCheckingCSV(*checkingIn)
+		checkingEntries, err := goldmachine.ParseCheckingCSV(*checkingIn)
 		if err != nil {
 			panic(err)
 		}
-		for _, je := range journalEntries {
-			fmt.Println(je.ToLedgerCLI())
+		jes = append(jes, checkingEntries...)
+	}
+	if *creditCardIn != "" {
+		creditCardEntries, err := goldmachine.ParseCreditCardCSV(*creditCardIn)
+		if err != nil {
+			panic(err)
 		}
+		jes = append(jes, creditCardEntries...)
+	}
+	for _, je := range jes {
+		fmt.Println(je.ToLedgerCLI())
 	}
 }
