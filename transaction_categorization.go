@@ -72,7 +72,7 @@ const (
 	SAVINGS          AssetAccount = "Savings"
 	VENMO            AssetAccount = "Venmo"
 	VENMO_RECON      AssetAccount = "Venmo Recon"
-	SQ_CASH          AssetAccount = "Square Cash"
+	CASH_APP         AssetAccount = "Cash App"
 )
 
 func (a AssetAccount) AccountName() string {

@@ -12,6 +12,7 @@ var (
 	creditCardIn *string = kingpin.Flag("credit-card-in", "CSV exported from Wells Fargo of Credit Card Transactions").String()
 	checkingIn   *string = kingpin.Flag("checking-in", "CSV exported from Wells Fargo of Checking Account Transactions").String()
 	venmoIn      *string = kingpin.Flag("venmo-in", "CSV exported from Venmo").String()
+	cashAppIn    *string = kingpin.Flag("cash-app-in", "CSV from Cash App").String()
 )
 
 type ByEffective []goldmachine.JournalEntry
@@ -43,6 +44,13 @@ func main() {
 			panic(err)
 		}
 		jes = append(jes, venmoEntries...)
+	}
+	if *cashAppIn != "" {
+		cashAppEntries, err := goldmachine.ParseCashAppCSV(*cashAppIn)
+		if err != nil {
+			panic(err)
+		}
+		jes = append(jes, cashAppEntries...)
 	}
 	sort.Sort(ByEffective(jes))
 	for _, je := range jes {
