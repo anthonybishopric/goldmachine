@@ -55,7 +55,8 @@ func (a RevenueAccount) AccountName() string {
 type LiabilityAccount string
 
 const (
-	CREDIT_CARD LiabilityAccount = "Credit Card"
+	CREDIT_CARD       LiabilityAccount = "Credit Card"
+	CREDIT_CARD_RECON LiabilityAccount = "Credit Card Recon"
 )
 
 func (a LiabilityAccount) AccountName() string {
@@ -67,8 +68,10 @@ type AssetAccount string
 const (
 	CHECKING_ACCOUNT AssetAccount = "Checking Account"
 	INVESTMENTS      AssetAccount = "Investments"
+	IRA              AssetAccount = "IRA"
 	SAVINGS          AssetAccount = "Savings"
 	VENMO            AssetAccount = "Venmo"
+	VENMO_RECON      AssetAccount = "Venmo Recon"
 	SQ_CASH          AssetAccount = "Square Cash"
 )
 
@@ -95,7 +98,7 @@ func p(patternToCompile string, acc Account) patternToAccount {
 func init() {
 	checkingPatterns = ps(
 		p(`ACERIDEPROD`, BIKING),
-		p(`Credit Card AUTO PAY`, CREDIT_CARD),
+		p(`Credit Card AUTO PAY`, CREDIT_CARD_RECON),
 		p(`E\*TRADE ACH TRNSFR`, INVESTMENTS),
 		p(`FRANCHISE TAX BD`, TAX),
 		p(`FRANCHISE TAX BO PAYMENTS`, TAX),
@@ -106,13 +109,13 @@ func init() {
 		p(`IRS USATAXPYMT`, TAX),
 		p(`NON-WELLS FARGO ATM TRANSACTION FEE`, ATM_FEE),
 		p(`NON-WF ATM WITHDRAWAL AUTHORIZED`, ATM),
-		p(`ONLINE TRANSFER .*TO VISA SIGNATURE CARD`, CREDIT_CARD),
+		p(`ONLINE TRANSFER .*TO VISA SIGNATURE CARD`, CREDIT_CARD_RECON),
 		p(`PGANDE`, UTILITIES),
 		p(`SCOTTCAROLL`, THERAPY),
 		p(`SQC\*CASH APP WINDE`, HOME),
 		p(`SQUARE INC DIRECT DEP`, INCOME),
 		p(`TO ZAEH A`, HOA),
-		p(`VENMO CASHOUT`, VENMO),
+		p(`VENMO CASHOUT`, VENMO_RECON),
 		p(`WINDERSON`, HOME),
 	)
 
@@ -127,7 +130,7 @@ func init() {
 		p(`Amazon Prime`, SHOPPING),
 		p(`AMZN MKTP US`, SHOPPING),
 		p(`ITUNES\.COM`, ENTERTAINMENT),
-		p(`AUTOMATIC PAYMENT - THANK YOU`, CREDIT_CARD),
+		p(`AUTOMATIC PAYMENT - THANK YOU`, CREDIT_CARD_RECON),
 		p(`BANDCAMP`, ENTERTAINMENT),
 		p(`BASQUE BOULANGERIE`, RESTAURANTS),
 		p(`BATH \& BODY WORKS`, HOME),
@@ -210,7 +213,7 @@ func init() {
 		p(`RESTAURANT`, RESTAURANTS),
 		p(`Old West Cinnamon Rolls`, BIKING),
 		p(`ONE MED\s`, HEALTH),
-		p(`ONLINE PAYMENT`, CREDIT_CARD),
+		p(`ONLINE PAYMENT`, CREDIT_CARD_RECON),
 		p(`ORENCHI RAMEN`, RESTAURANTS),
 		p(`PADRECITO`, RESTAURANTS),
 		p(`PEETS`, CAFES),
@@ -316,6 +319,7 @@ func init() {
 		p(`YOGA WORKS`, HEALTH),
 		p(`ZARA USA`, STYLE),
 	)
+
 }
 
 func ps(ps ...patternToAccount) []patternToAccount {
