@@ -8,33 +8,38 @@ import (
 type ExpenseAccount string
 
 const (
-	ACLU          ExpenseAccount = "ACLU"
-	ATM           ExpenseAccount = "ATM"
-	ATM_FEE       ExpenseAccount = "ATM Fee"
-	BARS          ExpenseAccount = "Bars"
-	BIKING        ExpenseAccount = "Biking"
-	BIRB          ExpenseAccount = "Birb"
-	CAFES         ExpenseAccount = "Food:Cafes"
-	DELIVERY      ExpenseAccount = "Food:Delivery"
-	FATTY         ExpenseAccount = "Food:Fatty"
-	GROCERIES     ExpenseAccount = "Food:Groceries"
-	LUNCH         ExpenseAccount = "Food:Lunch"
-	RESTAURANTS   ExpenseAccount = "Food:Restaurants"
-	DONATION      ExpenseAccount = "Donation"
-	ENTERTAINMENT ExpenseAccount = "Entertainment"
-	HEALTH        ExpenseAccount = "Health"
-	HOA           ExpenseAccount = "HOA"
-	HOME          ExpenseAccount = "Home"
-	SHOPPING      ExpenseAccount = "Shopping"
-	STYLE         ExpenseAccount = "Style"
-	TAX           ExpenseAccount = "Tax"
-	TAXIS         ExpenseAccount = "Taxis"
-	TECH          ExpenseAccount = "Tech"
-	THERAPY       ExpenseAccount = "Therapy"
-	TRANSIT       ExpenseAccount = "Transit"
-	TRAVEL        ExpenseAccount = "Travel"
-	UTILITIES     ExpenseAccount = "Utilities"
-	REIMBURSABLE  ExpenseAccount = "Reimbursable"
+	ACLU           ExpenseAccount = "ACLU"
+	ATM            ExpenseAccount = "ATM"
+	ATM_FEE        ExpenseAccount = "ATM Fee"
+	BARS           ExpenseAccount = "Bars"
+	BIKING         ExpenseAccount = "Biking:Other"
+	BIKING_FOOD    ExpenseAccount = "Biking:Food"
+	BIKING_APPAREL ExpenseAccount = "Biking:Apparel"
+	BIKING_SERVICE ExpenseAccount = "Biking:Service"
+	BIKING_EQUIP   ExpenseAccount = "Biking:Equipment"
+	BIKING_EVENTS  ExpenseAccount = "Biking:Events"
+	BIRB           ExpenseAccount = "Birb"
+	CAFES          ExpenseAccount = "Food:Cafes"
+	DELIVERY       ExpenseAccount = "Food:Delivery"
+	FATTY          ExpenseAccount = "Food:Fatty"
+	GROCERIES      ExpenseAccount = "Food:Groceries"
+	LUNCH          ExpenseAccount = "Food:Lunch"
+	RESTAURANTS    ExpenseAccount = "Food:Restaurants"
+	DONATION       ExpenseAccount = "Donation"
+	ENTERTAINMENT  ExpenseAccount = "Entertainment"
+	HEALTH         ExpenseAccount = "Health"
+	HOA            ExpenseAccount = "HOA"
+	HOME           ExpenseAccount = "Home"
+	SHOPPING       ExpenseAccount = "Shopping"
+	STYLE          ExpenseAccount = "Style"
+	TAX            ExpenseAccount = "Tax"
+	TAXIS          ExpenseAccount = "Taxis"
+	TECH           ExpenseAccount = "Tech"
+	THERAPY        ExpenseAccount = "Therapy"
+	TRANSIT        ExpenseAccount = "Transit"
+	TRAVEL         ExpenseAccount = "Travel"
+	UTILITIES      ExpenseAccount = "Utilities"
+	REIMBURSABLE   ExpenseAccount = "Reimbursable"
 )
 
 func (a ExpenseAccount) AccountName() string {
@@ -46,7 +51,7 @@ type RevenueAccount string
 const (
 	INTEREST RevenueAccount = "Interest"
 	INCOME   RevenueAccount = "Income"
-)
+) /**/
 
 func (a RevenueAccount) AccountName() string {
 	return fmt.Sprintf("Revenue:%s", a)
@@ -123,7 +128,7 @@ func init() {
 		p(`BURGERS AND B`, RESTAURANTS),
 		p(`A MANO`, RESTAURANTS),
 		p(`ACLU`, ACLU),
-		p(`AIDSLIFECYCLE`, BIKING),
+		p(`AIDSLIFECYCLE`, BIKING_EVENTS),
 		p(`AIRBNB`, TRAVEL),
 		p(`ALAMO NEW MISSION`, ENTERTAINMENT),
 		p(`ALASKA AIR`, TRAVEL),
@@ -164,10 +169,10 @@ func init() {
 		p(`EB THE ENCHANTED FORE`, ENTERTAINMENT),
 		p(`EMIL VILLA'S HICKORY`, RESTAURANTS),
 		p(`EMMYS SPAGHETTI SHACK`, RESTAURANTS),
-		p(`Equator Coffees`, BIKING),
+		p(`Equator Coffees`, BIKING_FOOD),
 		p(`EXPEDIA`, TRAVEL),
 		p(`Experian`, UTILITIES),
-		p(`FAIRFAX COFFEE`, BIKING),
+		p(`FAIRFAX COFFEE`, BIKING_FOOD),
 		p(`FENTONS`, FATTY),
 		p(`FOREIGN CINEMA`, RESTAURANTS),
 		p(`FOSTERS FREEZE`, RESTAURANTS),
@@ -181,8 +186,8 @@ func init() {
 		p(`HIWAY`, RESTAURANTS),
 		p(`HOTELS.COM`, TRAVEL),
 		p(`HQ FUELS`, TRAVEL),
-		p(`IMATHLETE.COM`, BIKING),
-		p(`INCYCLE BICYCLES`, BIKING),
+		p(`IMATHLETE.COM`, BIKING_EVENTS),
+		p(`INCYCLE BICYCLES`, BIKING_EVENTS),
 		p(`INTUIT`, REIMBURSABLE),
 		p(`QuickBooks`, REIMBURSABLE),
 		p(`IPPUDO`, RESTAURANTS),
@@ -211,7 +216,7 @@ func init() {
 		p(`NOPALITO`, RESTAURANTS),
 		p(`NOVY RESTAURANT`, RESTAURANTS),
 		p(`RESTAURANT`, RESTAURANTS),
-		p(`Old West Cinnamon Rolls`, BIKING),
+		p(`Old West Cinnamon Rolls`, BIKING_FOOD),
 		p(`ONE MED\s`, HEALTH),
 		p(`ONLINE PAYMENT`, CREDIT_CARD_RECON),
 		p(`ORENCHI RAMEN`, RESTAURANTS),
@@ -228,7 +233,7 @@ func init() {
 		p(`SEPHORA`, STYLE),
 		p(`SMITTEN ICE CREAM`, FATTY),
 		p(`SOLAGE`, TRAVEL),
-		p(`HILLKILLER`, BIKING),
+		p(`HILLKILLER`, BIKING_APPAREL),
 		p(`SPARROWS LODGE`, TRAVEL),
 		p(`SPORTS BASEMENT`, BIKING),
 		p(`Spotify`, ENTERTAINMENT),
@@ -240,28 +245,28 @@ func init() {
 		p(`BARZOTTO`, RESTAURANTS),
 		p(`BLUE BOTTLE`, CAFES),
 		p(`BOB'S DONUTS`, FATTY),
-		p(`BOVINE BAKERY`, BIKING),
-		p(`BROWN BUTTER COOKIE`, BIKING),
+		p(`BOVINE BAKERY`, BIKING_FOOD),
+		p(`BROWN BUTTER COOKIE`, BIKING_FOOD),
 		p(`CAVIAR`, DELIVERY),
 		p(`COMIX`, ENTERTAINMENT),
 		p(`CORRIDOR`, BARS),
 		p(`CRAFTSMAN AND WOLVES`, FATTY),
 		p(`DANDELION`, FATTY),
-		p(`DEVIL'S TEETH`, BIKING),
+		p(`DEVIL'S TEETH`, BIKING_FOOD),
 		p(`DOG EARED BOOKS`, ENTERTAINMENT),
 		p(`DRIP! MOBILE ESPRESSO`, CAFES),
-		p(`FLYWHEEL COFFEE`, BIKING),
+		p(`FLYWHEEL COFFEE`, BIKING_FOOD),
 		p(`FOUR BARREL COFFEE`, CAFES),
 		p(`GIAN PERRONE`, REIMBURSABLE),
 		p(`GIDDY CANDY`, FATTY),
 		p(`GINO D'AGOSTINO`, STYLE),
-		p(`GRANOLA'S COFFE`, BIKING), // bakery in HMB
+		p(`GRANOLA'S COFFE`, BIKING_FOOD), // bakery in HMB
 		p(`HUMPHRY SLOCOMB`, FATTY),
 		p(`JUICEY LUCY'S`, GROCERIES),
 		p(`KAGAWA\-YA`, LUNCH),
 		p(`LEV SAN FRANCISCO`, LUNCH),
 		p(`MAUER PARK`, CAFES),
-		p(`NEIGHBORS CORNE`, BIKING),
+		p(`NEIGHBORS CORNE`, BIKING_FOOD),
 		p(`NOE VALLEY BAKERY`, FATTY),
 		p(`OZ PIZZA`, RESTAURANTS),
 		p(`P\-FITS/FITTED`, BIKING),
@@ -296,24 +301,24 @@ func init() {
 		p(`THE ANIMAL COMPANY`, BIRB),
 		p(`THE CHEESE BOARD`, RESTAURANTS),
 		p(`THE KITCHEN T`, RESTAURANTS),
-		p(`THE MODEL BAKERY`, BIKING),
+		p(`THE MODEL BAKERY`, BIKING_FOOD),
 		p(`NATURAL SISTERS CAFE`, CAFES),
 		p(`THE SANDWHICH PALM`, RESTAURANTS),
 		p(`CAFFE ACRI BELVEDERE`, BIKING),
-		p(`DELLA FATTORIA - BAKPETALUMA`, BIKING),
+		p(`DELLA FATTORIA - BAKPETALUMA`, BIKING_FOOD),
 		p(`TST\* KASA`, RESTAURANTS),
 		p(`STATE BIRD PROVISIONS`, RESTAURANTS),
 		p(`TARTINE BAKERY`, FATTY),
 		p(`TURO INC\.`, TRAVEL),
 		p(`URBAN TORTILLA`, RESTAURANTS),
 		p(`UVA ENOTECA`, RESTAURANTS),
-		p(`VALENCIA CYCLERY`, BIKING),
-		p(`VENICE GOURMET`, BIKING),
+		p(`VALENCIA CYCLERY`, BIKING_EQUIP),
+		p(`VENICE GOURMET`, BIKING_FOOD),
 		p(`VITAMINSHOPPE`, HEALTH),
 		p(`VZWRLSS`, UTILITIES),
 		p(`WALGREENS`, HOME),
 		p(`WHOLEFDS`, GROCERIES),
-		p(`Grizzly Peak Cyclists`, BIKING),
+		p(`Grizzly Peak Cyclists`, BIKING_EVENTS),
 		p(`WWW.TOPMAN.COM`, STYLE),
 		p(`YOGA TREE`, HEALTH),
 		p(`YOGA WORKS`, HEALTH),
