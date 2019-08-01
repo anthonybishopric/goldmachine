@@ -323,6 +323,8 @@ func init() {
 		p(`YOGA TREE`, HEALTH),
 		p(`YOGA WORKS`, HEALTH),
 		p(`ZARA USA`, STYLE),
+		p(`LEMONADE PALO ALTO`, BIKING_FOOD),
+		p(`PANAMABAYCO`, BIKING_FOOD),
 	)
 
 }
